@@ -76,12 +76,23 @@ class MiddlemanDragonfly < ::Middleman::Extension
       else
         path = extensions[:dragonfly].absolute_build_path(image)
         image.to_file(path).close
-        extensions[:dragonfly].build_path(image)
+        File.join(app.config[:images_dir], extensions[:dragonfly].build_path(image))
       end
     end
 
     def thumb_tag path, geometry, options={}
-      image_tag thumb_url(path, geometry), options
+      image = extensions[:dragonfly].thumb(path, geometry)
+      return unless image
+
+      url = if environment == :development
+        image.b64_data
+      else
+        path = extensions[:dragonfly].absolute_build_path(image)
+        image.to_file(path).close
+        extensions[:dragonfly].build_path(image)
+      end
+
+      image_tag url, options
     end
 
   end
