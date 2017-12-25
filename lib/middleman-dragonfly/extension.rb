@@ -76,7 +76,7 @@ class MiddlemanDragonfly < ::Middleman::Extension
       else
         path = extensions[:dragonfly].absolute_build_path(image)
         image.to_file(path).close
-        "/#{app.config[:images_dir]}/#{extensions[:dragonfly].build_path(image))}"
+        "/#{app.config[:images_dir]}/#{extensions[:dragonfly].build_path(image)}"
       end
     end
 
