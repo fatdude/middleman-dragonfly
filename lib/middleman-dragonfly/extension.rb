@@ -25,10 +25,7 @@ class MiddlemanDragonfly < ::Middleman::Extension
 
     # set up your extension
     # puts options.my_option
-    puts MiddlemanDragonfly.images
     configure_dragonfly
-    puts 'Initialised dragonfly extension'
-    puts app.config[:images_dir]
   end
 
   def after_configuration
@@ -78,7 +75,6 @@ class MiddlemanDragonfly < ::Middleman::Extension
         image.b64_data
       else
         path = extensions[:dragonfly].absolute_build_path(image)
-        puts "Path to image in build #{path}"
         image.to_file(path).close
         extensions[:dragonfly].build_path(image)
       end
